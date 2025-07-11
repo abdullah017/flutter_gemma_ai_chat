@@ -146,6 +146,16 @@ lib/
 - 🇺🇸 **English**: Fully supported chat interface
 - 🌐 **Other Languages**: The AI can understand and respond in various languages when you ask in those languages
 
+
+## Screen Shot
+
+<img src="https://github.com/user-attachments/assets/9665eb11-bc71-4658-bb9c-a7688861b1c7" width="350" alt="accessibility text">
+<img src="https://github.com/user-attachments/assets/3787817b-2ea7-4c92-aa95-856923e26a13" width="350" alt="accessibility text">
+<img src="https://github.com/user-attachments/assets/ec1e3d14-cf4c-427d-b1e7-60e9040372af" width="350" alt="accessibility text">
+<img src="https://github.com/user-attachments/assets/2e2a9c89-6eeb-4bcf-817f-03848d3333a7" width="350" alt="accessibility text">
+
+
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
