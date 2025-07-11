@@ -47,17 +47,12 @@ class ConversationListDrawer extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          Consumer<ChatProvider>(
-            builder: (context, chatProvider, child) {
-              final languageName = AppConstants.languageNames[chatProvider.selectedLanguage] ?? 'English';
-              return Text(
-                'Language: $languageName',
-                style: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 14,
-                ),
-              );
-            },
+          const Text(
+            'Language: English',
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 14,
+            ),
           ),
         ],
       ),

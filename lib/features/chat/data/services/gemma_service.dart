@@ -27,10 +27,9 @@ class GemmaService {
 
   Future<void> initialize({
     required String apiKey,
-    required String language,
     Function(double)? onProgress,
   }) async {
-    if (_isModelReady && _currentLanguage == language) return;
+    if (_isModelReady) return;
 
     try {
       final modelFilename = AppConstants.modelFileName;
@@ -56,13 +55,8 @@ class GemmaService {
       debugPrint("Creating chat...");
       _chat = await _model!.createChat();
       
-      // Set system prompt based on language
-      debugPrint("Setting system prompt for language: $language");
-      await _setSystemPrompt(language);
-      
       debugPrint("Model and chat initialized successfully");
       _isModelReady = true;
-      _currentLanguage = language;
     } catch (e) {
       debugPrint("Error initializing model: $e");
       rethrow;
@@ -113,27 +107,13 @@ class GemmaService {
   Future<void> _setSystemPrompt(String language) async {
     if (_chat == null) return;
     
-    final languageName = AppConstants.languageNames[language] ?? 'English';
-    final systemPrompt = '''
-You are a helpful AI assistant. Please follow these guidelines:
-1. Respond in $languageName language
-2. Be friendly, helpful, and informative
-3. Simple greetings like 'hello', 'hi', 'selam', 'hola' are normal conversation starters
-4. Provide accurate and relevant information
-5. If you don't know something, say so honestly
-6. Keep responses conversational and engaging
-7. For technical questions, provide clear explanations
-8. Always maintain a respectful and professional tone
-''';
-
-    await _chat!.addQueryChunk(Message.text(
-      text: systemPrompt,
-      isUser: false,
-    ));
+    // Skip system prompt for now - it might be causing issues
+    // Just rely on per-message language instructions
+    debugPrint("Skipping system prompt to test basic functionality");
   }
 
-  Future<String> getResponse(String message, String language) async {
-    debugPrint("getResponse called with message: $message, language: $language");
+  Future<String> getResponse(String message) async {
+    debugPrint("getResponse called with message: $message");
     debugPrint("_isModelReady: $_isModelReady");
     debugPrint("_chat is null: ${_chat == null}");
     
@@ -142,30 +122,32 @@ You are a helpful AI assistant. Please follow these guidelines:
       return "Error: Gemma Chat is not initialized.";
     }
 
-    // If language changed, reinitialize with new language
-    if (_currentLanguage != language) {
-      debugPrint("Language changed from $_currentLanguage to $language, reinitializing...");
-      // Note: This would require the API key, which we don't have here
-      // In a real scenario, you might want to store the API key or handle this differently
-    }
-
     try {
-      debugPrint("Adding query chunk...");
+      // Use a very simple approach - just add the user message
+      debugPrint("Adding user message: $message");
+      await _chat!.addQueryChunk(Message.text(text: message, isUser: true));
       
-      // Format the message based on language
-      final languageName = AppConstants.languageNames[language] ?? 'English';
-      String formattedMessage = "User message: $message\n\nPlease respond in $languageName in a helpful and friendly way.";
-      
-      await _chat!.addQueryChunk(Message.text(text: formattedMessage, isUser: true));
       debugPrint("Generating chat response...");
+      
+      // Try to get response
       final response = await _chat!.generateChatResponse();
-      debugPrint("Response received: $response");
+      
+      debugPrint("Response received: '$response'");
+      debugPrint("Response length: ${response.length}");
+      
+      if (response.isEmpty || response.trim().isEmpty) {
+        debugPrint("Empty response received");
+        return 'I apologize, but I cannot generate a response right now. Please try a different message.';
+      }
+      
       return response;
     } catch (e) {
       debugPrint("Error getting response from model: $e");
       return 'Error: $e';
     }
   }
+
+
 
   Future<void> clearChat() async {
     if (_chat != null && _model != null) {

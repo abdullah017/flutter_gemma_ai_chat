@@ -17,7 +17,6 @@ class ChatProvider extends ChangeNotifier {
   bool _isModelInitialized = false;
   bool _isGeneratingResponse = false;
   String? _error;
-  String _selectedLanguage = 'en';
   
   // Getters
   List<ChatConversation> get conversations => _conversations;
@@ -27,7 +26,6 @@ class ChatProvider extends ChangeNotifier {
   bool get isModelInitialized => _isModelInitialized;
   bool get isGeneratingResponse => _isGeneratingResponse;
   String? get error => _error;
-  String get selectedLanguage => _selectedLanguage;
   
   // Initialize
   Future<void> initialize() async {
@@ -35,12 +33,6 @@ class ChatProvider extends ChangeNotifier {
     _clearError();
     
     try {
-      // Load saved language
-      final savedLanguage = await StorageService.getLanguage();
-      if (savedLanguage != null) {
-        _selectedLanguage = savedLanguage;
-      }
-      
       // Load conversations
       await loadConversations();
       
@@ -72,28 +64,11 @@ class ChatProvider extends ChangeNotifier {
   }
   
   Future<void> _initializeModel(String apiKey) async {
-    await _chatRepository.initialize(apiKey, _selectedLanguage);
+    await _chatRepository.initialize(apiKey);
     _isModelInitialized = true;
     notifyListeners();
   }
   
-  // Language management
-  Future<void> setLanguage(String languageCode) async {
-    if (_selectedLanguage == languageCode) return;
-    
-    _selectedLanguage = languageCode;
-    await StorageService.saveLanguage(languageCode);
-    
-    // Re-initialize model with new language if already initialized
-    if (_isModelInitialized) {
-      final apiKey = await StorageService.getApiKey();
-      if (apiKey != null) {
-        await _initializeModel(apiKey);
-      }
-    }
-    
-    notifyListeners();
-  }
   
   // Conversation management
   Future<void> loadConversations() async {
@@ -111,7 +86,7 @@ class ChatProvider extends ChangeNotifier {
     try {
       final conversation = ChatConversation(
         title: title ?? 'New Chat',
-        language: _selectedLanguage,
+        language: 'en',
       );
       
       await _chatRepository.createConversation(conversation);
@@ -200,7 +175,7 @@ class ChatProvider extends ChangeNotifier {
       notifyListeners();
       
       // Generate AI response
-      final aiResponse = await _chatRepository.generateResponse(content, _selectedLanguage);
+      final aiResponse = await _chatRepository.generateResponse(content);
       
       // Create AI message
       final aiMessage = ChatMessage(
@@ -231,6 +206,7 @@ class ChatProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
   
   Future<void> deleteMessage(String messageId) async {
     _clearError();

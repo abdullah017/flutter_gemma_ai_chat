@@ -1,6 +1,6 @@
 # 🤖 Gemma AI Chat
 
-A modern, feature-rich local AI chat application built with Flutter and powered by Google's Gemma-3-1B-IT model. Experience the power of on-device AI with beautiful UI/UX, multi-language support, and secure data handling.
+A modern, lightweight local AI chat application built with Flutter and powered by Google's Gemma-3-1B-IT model. Experience the power of on-device AI with beautiful UI/UX, secure data handling, and complete privacy.
 
 ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
@@ -10,14 +10,13 @@ A modern, feature-rich local AI chat application built with Flutter and powered 
 
 ### 🎯 Core Features
 - **Local AI Processing**: Runs Gemma-3-1B-IT model entirely on your device
-- **Multi-language Support**: 12+ languages including English, Turkish, Spanish, French, German, and more
+- **English Chat Interface**: Clean, focused chat experience in English
 - **Secure API Key Storage**: Uses Flutter Secure Storage for encrypted key management
 - **Persistent Chat History**: SQLite database for reliable conversation storage
 - **Modern Material 3 UI**: Beautiful, responsive design with smooth animations
 
 ### 🚀 Advanced Features
 - **Multiple Conversations**: Create, manage, and switch between different chat sessions
-- **Smart Language Detection**: AI responds in your preferred language
 - **Message Management**: Copy, share, and delete individual messages
 - **Export Conversations**: Share entire chat sessions
 - **Real-time Typing Indicators**: Visual feedback during AI response generation
@@ -106,11 +105,6 @@ A modern, feature-rich local AI chat application built with Flutter and powered 
 - Each conversation maintains its own context
 - Rename conversations by long-pressing
 
-### Language Selection
-- Access language settings from the menu
-- Choose from 12 supported languages
-- AI will respond in your selected language
-
 ### Message Management
 - Long-press messages for options
 - Copy, share, or delete individual messages
@@ -147,20 +141,10 @@ lib/
 - **No Data Collection**: Your conversations never leave your device
 - **Open Source**: Full transparency in code and data handling
 
-## 🌍 Supported Languages
+## 🌍 Language Support
 
-- 🇺🇸 English
-- 🇹🇷 Türkçe (Turkish)
-- 🇪🇸 Español (Spanish)
-- 🇫🇷 Français (French)
-- 🇩🇪 Deutsch (German)
-- 🇮🇹 Italiano (Italian)
-- 🇵🇹 Português (Portuguese)
-- 🇷🇺 Русский (Russian)
-- 🇯🇵 日本語 (Japanese)
-- 🇰🇷 한국어 (Korean)
-- 🇨🇳 中文 (Chinese)
-- 🇸🇦 العربية (Arabic)
+- 🇺🇸 **English**: Fully supported chat interface
+- 🌐 **Other Languages**: The AI can understand and respond in various languages when you ask in those languages
 
 ## 🤝 Contributing
 

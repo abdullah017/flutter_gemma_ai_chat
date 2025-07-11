@@ -10,13 +10,13 @@ class ChatRepository {
   ChatRepository(this._gemmaService, this._databaseService);
   
   // Model initialization
-  Future<void> initialize(String apiKey, String language) async {
-    await _gemmaService.initialize(apiKey: apiKey, language: language);
+  Future<void> initialize(String apiKey) async {
+    await _gemmaService.initialize(apiKey: apiKey);
   }
   
   // Response generation
-  Future<String> generateResponse(String message, String language) async {
-    return await _gemmaService.getResponse(message, language);
+  Future<String> generateResponse(String message) async {
+    return await _gemmaService.getResponse(message);
   }
   
   // Conversation management

@@ -27,7 +27,6 @@ class _ModelDownloadProgressScreenState extends State<ModelDownloadProgressScree
     try {
       await _gemmaService.initialize(
         apiKey: widget.apiKey,
-        language: 'en',
         onProgress: (progress) {
           setState(() {
             _downloadProgress = progress;

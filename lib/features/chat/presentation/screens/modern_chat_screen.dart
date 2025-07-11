@@ -10,7 +10,6 @@ import '../../../../core/constants/app_constants.dart';
 import '../widgets/message_bubble.dart';
 import '../widgets/typing_indicator.dart';
 import '../widgets/chat_input_field.dart';
-import '../widgets/language_selector.dart';
 import '../widgets/conversation_list_drawer.dart';
 
 class ModernChatScreen extends StatefulWidget {
@@ -77,6 +76,7 @@ class _ModernChatScreenState extends State<ModernChatScreen> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -136,16 +136,6 @@ class _ModernChatScreenState extends State<ModernChatScreen> {
                       Icon(Icons.add),
                       SizedBox(width: 8),
                       Text('New Chat'),
-                    ],
-                  ),
-                ),
-                const PopupMenuItem(
-                  value: 'language',
-                  child: Row(
-                    children: [
-                      Icon(Icons.language),
-                      SizedBox(width: 8),
-                      Text('Language'),
                     ],
                   ),
                 ),
@@ -339,14 +329,9 @@ class _ModernChatScreenState extends State<ModernChatScreen> {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 8),
-          Consumer<ChatProvider>(
-            builder: (context, chatProvider, child) {
-              final languageName = AppConstants.languageNames[chatProvider.selectedLanguage] ?? 'English';
-              return Text(
-                'Messages will appear in $languageName',
-                style: const TextStyle(color: Colors.grey),
-              );
-            },
+          const Text(
+            'Messages will appear in English',
+            style: TextStyle(color: Colors.grey),
           ),
         ],
       ),
@@ -358,9 +343,6 @@ class _ModernChatScreenState extends State<ModernChatScreen> {
       case 'new_chat':
         chatProvider.createNewConversation();
         break;
-      case 'language':
-        _showLanguageSelector();
-        break;
       case 'clear_chat':
         _showClearChatDialog(chatProvider);
         break;
@@ -370,12 +352,6 @@ class _ModernChatScreenState extends State<ModernChatScreen> {
     }
   }
 
-  void _showLanguageSelector() {
-    showDialog(
-      context: context,
-      builder: (context) => const LanguageSelector(),
-    );
-  }
 
   void _showClearChatDialog(ChatProvider chatProvider) {
     showDialog(
