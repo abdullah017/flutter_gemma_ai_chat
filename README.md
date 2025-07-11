@@ -29,9 +29,7 @@ A modern, lightweight local AI chat application built with Flutter and powered b
 - **Responsive Design**: Optimized for various screen sizes
 - **Intuitive Navigation**: Easy-to-use drawer-based conversation management
 
-## 📱 Screenshots
 
-*Add screenshots here showing the beautiful UI*
 
 ## 🛠️ Technical Stack
 
@@ -147,7 +145,8 @@ lib/
 - 🌐 **Other Languages**: The AI can understand and respond in various languages when you ask in those languages
 
 
-## Screen Shot
+## 📱 Screenshots
+
 
 <img src="https://github.com/user-attachments/assets/9665eb11-bc71-4658-bb9c-a7688861b1c7" width="350" alt="accessibility text">
 <img src="https://github.com/user-attachments/assets/3787817b-2ea7-4c92-aa95-856923e26a13" width="350" alt="accessibility text">
